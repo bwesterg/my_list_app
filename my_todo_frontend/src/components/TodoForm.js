@@ -26,10 +26,15 @@ export default class TodoForm extends Component{
     })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.addTodo(this.state)
+  }
+
   render(){
     const {name, description, urgency, urgent} = this.state;
     return(
-      <form className="todo-form">
+      <form className="todo-form" onSubmit={this.handleSubmit}>
         <h2>Create a new Todo</h2>
         <label>Name</label>
         <input onChange={this.handleChange} type="text" name="name" value={name}/>
@@ -41,7 +46,6 @@ export default class TodoForm extends Component{
           <label>Urgent</label>
           <input onChange={this.handleChange} type="checkbox" name="urgent" checked={urgent}/>
         </div>
-        <label>Name</label>
         <input onChange={this.handleChange} type="submit" />
       </form>
     )
