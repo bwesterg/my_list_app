@@ -42,14 +42,28 @@ body  {
 .todo-item {
   background-color: white;
   width: 200px;
-  height: 200px;
+  height: max-content;
   box-shadow: 0 20px 20px -10px rgb(1, 180, 180);
   text-align: center;
   border-radius: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.todo-item-button-box {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .delete-button {
   color: white;
   background-color: red;
+  border: none;
+}
+
+.edit-button {
+  color: rgb(123, 122, 122);
+  background-color: yellow;
   border: none;
 }
