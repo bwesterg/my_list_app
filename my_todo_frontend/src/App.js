@@ -21,12 +21,33 @@ class App extends Component {
     this.getTodos();
   }
 
+  addTodo = (newTodo) => {
+    this.setState({
+      todos: [...this.state.todos, newTodo]
+    })
+    fetch(todosUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newTodo)
+    })
+  }
+
+  deleteTodo = (id) => {
+    let filtered = this.state.todos.filter(todo => todo.id !== id)
+    this.setState({
+      todos: filtered
+    })
+    fetch(todosUrl + "/" + id, {method: "DELETE"})
+  }
+
   render(){
     return (
       <div className="App">
         <h1>Todo App</h1>
-        <TodoForm />
-        <TodoContainer todos={this.state.todos} happyprop/>
+        <TodoForm addTodo={this.addTodo}/>
+        <TodoContainer deleteTodo={this.deleteTodo} todos={this.state.todos} happyprop/>
       </div>
     );
   }

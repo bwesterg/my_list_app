@@ -47,3 +47,9 @@ body  {
   text-align: center;
   border-radius: 6px;
 }
+
+.delete-button {
+  color: white;
+  background-color: red;
+  border: none;
+}
