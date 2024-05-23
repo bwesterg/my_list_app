@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import TodoContainer from './components/TodoContainer';
 import TodoForm from './components/TodoForm';
-const todosUrl = "http://localhost:3000/todos";
+import { patchTodo, postTodo, deleteTodo } from './helpers';
+const todosUrl = "http://localhost:3000/todos/";
 
 class App extends Component {
 
@@ -25,29 +26,13 @@ class App extends Component {
     this.setState({
       todos: [...this.state.todos, newTodo]
     })
-    fetch(todosUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({todo: newTodo})
-      //^^^ need to send a top level key because 
-      //rails is now using strong params
-    })
+    postTodo(newTodo)
   }
 
   updateTodo = (updatedTodo) => {
     let todos = this.state.todos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo)
     this.setState({todos})
-    fetch(todosUrl + "/" + updatedTodo.id, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({todo: updatedTodo})
-      //^^^ need to send a top level key because 
-      //rails is now using strong params
-    })
+    patchTodo(updatedTodo)
   }
 
   deleteTodo = (id) => {
@@ -55,7 +40,7 @@ class App extends Component {
     this.setState({
       todos: filtered
     })
-    fetch(todosUrl + "/" + id, {method: "DELETE"})
+    deleteTodo(id)
   }
 
   render(){

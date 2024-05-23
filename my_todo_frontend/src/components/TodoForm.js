@@ -49,6 +49,12 @@ export default class TodoForm extends Component{
     }
   }
 
+  showCloseButton = () => {
+    return this.props.todo 
+      ? <button className="close-button" onClick={this.props.handleToggle}>Do not save changes</button>
+      : null
+  }
+
   showDoneCheckbox = () => {
     return this.props.todo
     ? (
@@ -76,6 +82,8 @@ export default class TodoForm extends Component{
         </div>
         {this.showDoneCheckbox()}
         <input onChange={this.handleChange} type="submit" />
+        {this.showCloseButton()}
+        
       </form>
     )
   }
