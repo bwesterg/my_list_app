@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import TodoForm from './TodoForm';
 
-export default function TodoItem({id, name, description, urgency, urgent, done, deleteTodo}){
+export default function TodoItem({id, name, description, urgency, urgent, done, deleteTodo, updateTodo}){
+
+  const todo = {id, name, description, urgency, urgent, done}
+  //'un'-destructuring these properties so they can be sent down in the return below. 
 
   const [isToggled, setIsToggled] = useState(false)
   const handleClick = (event) => deleteTodo(id)
@@ -18,5 +21,10 @@ export default function TodoItem({id, name, description, urgency, urgent, done, 
     </li>
   )
 
-  return isToggled ? <TodoForm /> : todoCard()
+  return isToggled 
+    ? <TodoForm 
+      handleToggle={handleToggle} 
+      submitAction={updateTodo} 
+      todo={todo} /> 
+    : todoCard()
 }

@@ -24,10 +24,11 @@ body  {
   margin-bottom: 30px;
 }
 
-.urgent-input {
+.input-group {
   display: flex;
   justify-content: center;
 }
+
 
 .todo-list {
   display: flex;
